@@ -1,0 +1,44 @@
+{
+  "quelle": "videos/input/IMG_9723.MOV",
+  "gewichte": "C:\\IU\\DLBAIPCV01\\runs\\train\\E9_s1280_robust\\weights\\best.pt",
+  "imgsz": 1280,
+  "conf": 0.4,
+  "half": false,
+  "quelle_fps": 30.0,
+  "aufloesung": "1920x1080",
+  "frames_gesamt": 4440,
+  "frames_verarbeitet": 4438,
+  "frames_verworfen": 2,
+  "anteil_verarbeitet": 1.0,
+  "latenz_ms_mittel": 21.0,
+  "latenz_ms_median": 20.79,
+  "latenz_ms_p95": 23.67,
+  "fps_verarbeitung": 47.6,
+  "fps_ende_zu_ende": 30.0,
+  "echtzeitfaehig": true,
+  "gpu_takt_mhz_mittel": 2032,
+  "realtime_simulation": true,
+  "stabilisierung": [
+    2,
+    3
+  ],
+  "detektionen_je_klasse": {
+    "danger": 194,
+    "prohibitory": 411,
+    "other": 648,
+    "mandatory": 406
+  },
+  "ausgabevideo": "C:\\IU\\DLBAIPCV01\\videos\\output\\IMG_9723_E9_yolo.mp4",
+  "system": {
+    "python": "3.12.10",
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+    "arbeitsverzeichnis": "C:\\IU\\DLBAIPCV01",
+    "torch": "2.11.0+cu128",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "cuda": "12.8",
+    "ultralytics": "8.4.165",
+    "opencv": "5.0.0"
+  }
+}

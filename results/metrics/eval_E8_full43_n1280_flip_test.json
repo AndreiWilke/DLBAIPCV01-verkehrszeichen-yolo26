@@ -1,0 +1,337 @@
+{
+  "name": "E8_full43_n1280_flip",
+  "weights": "C:\\IU\\DLBAIPCV01\\runs\\train\\E8_full43_n1280_flip\\weights\\best.pt",
+  "data": "C:\\IU\\DLBAIPCV01\\data\\processed\\gtsdb_yolo_full\\data.yaml",
+  "split": "test",
+  "imgsz": 1280,
+  "precision": 0.6416293213255423,
+  "recall": 0.5234893413508397,
+  "mAP50": 0.5904035650290372,
+  "mAP75": 0.5896140913448267,
+  "mAP50_95": 0.5303122628419896,
+  "speed_ms_pro_bild": {
+    "preprocess": 2.75,
+    "inference": 6.734,
+    "loss": 0.003,
+    "postprocess": 1.291
+  },
+  "plots_dir": "C:\\IU\\DLBAIPCV01\\runs\\eval\\E8_full43_n1280_flip",
+  "system": {
+    "python": "3.12.10",
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+    "arbeitsverzeichnis": "C:\\IU\\DLBAIPCV01",
+    "torch": "2.11.0+cu128",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "cuda": "12.8",
+    "ultralytics": "8.4.165",
+    "opencv": "5.0.0"
+  },
+  "je_klasse": [
+    {
+      "klasse_id": 1,
+      "klasse": "speed_30",
+      "precision": 0.7547361868590147,
+      "recall": 0.6951418605047002,
+      "AP50": 0.8174699046275137,
+      "AP50_95": 0.7463707687575838
+    },
+    {
+      "klasse_id": 2,
+      "klasse": "speed_50",
+      "precision": 0.4601976339453282,
+      "recall": 0.9090909090909091,
+      "AP50": 0.5697525548836486,
+      "AP50_95": 0.501165250875389
+    },
+    {
+      "klasse_id": 3,
+      "klasse": "speed_60",
+      "precision": 0.2772520765542835,
+      "recall": 0.38581881410454605,
+      "AP50": 0.37179608797000113,
+      "AP50_95": 0.35232122225600493
+    },
+    {
+      "klasse_id": 4,
+      "klasse": "speed_70",
+      "precision": 0.8056779381402628,
+      "recall": 0.35135135135135137,
+      "AP50": 0.7061503416626449,
+      "AP50_95": 0.6308258791629255
+    },
+    {
+      "klasse_id": 5,
+      "klasse": "speed_80",
+      "precision": 0.8976393732579677,
+      "recall": 0.5625,
+      "AP50": 0.7759992444662254,
+      "AP50_95": 0.7012900119796345
+    },
+    {
+      "klasse_id": 6,
+      "klasse": "end_speed_80",
+      "precision": 0.8010975896815966,
+      "recall": 1.0,
+      "AP50": 0.995,
+      "AP50_95": 0.82075
+    },
+    {
+      "klasse_id": 7,
+      "klasse": "speed_100",
+      "precision": 0.7230399947173524,
+      "recall": 1.0,
+      "AP50": 0.945,
+      "AP50_95": 0.8985
+    },
+    {
+      "klasse_id": 8,
+      "klasse": "speed_120",
+      "precision": 0.8178774394037184,
+      "recall": 0.8983259167204507,
+      "AP50": 0.8962626262626261,
+      "AP50_95": 0.783195707070707
+    },
+    {
+      "klasse_id": 9,
+      "klasse": "no_overtaking",
+      "precision": 0.70431868143857,
+      "recall": 0.7953724058608408,
+      "AP50": 0.7767341269841269,
+      "AP50_95": 0.682765873015873
+    },
+    {
+      "klasse_id": 10,
+      "klasse": "no_overtaking_trucks",
+      "precision": 0.8314499366431852,
+      "recall": 0.8235294117647058,
+      "AP50": 0.86422995951417,
+      "AP50_95": 0.7594888958410011
+    },
+    {
+      "klasse_id": 11,
+      "klasse": "priority_next_intersection",
+      "precision": 0.8465185537283471,
+      "recall": 0.8333333333333334,
+      "AP50": 0.8706643356643354,
+      "AP50_95": 0.8154312354312353
+    },
+    {
+      "klasse_id": 12,
+      "klasse": "priority_road",
+      "precision": 0.9480593561081262,
+      "recall": 0.967741935483871,
+      "AP50": 0.9922140762463343,
+      "AP50_95": 0.8563677915704258
+    },
+    {
+      "klasse_id": 13,
+      "klasse": "give_way",
+      "precision": 1.0,
+      "recall": 0.984670267206466,
+      "AP50": 0.995,
+      "AP50_95": 0.8734993620414674
+    },
+    {
+      "klasse_id": 14,
+      "klasse": "stop",
+      "precision": 0.864289377820156,
+      "recall": 0.9,
+      "AP50": 0.895,
+      "AP50_95": 0.8252499999999999
+    },
+    {
+      "klasse_id": 15,
+      "klasse": "no_vehicles",
+      "precision": 0.5805019680620577,
+      "recall": 0.2,
+      "AP50": 0.6071568627450981,
+      "AP50_95": 0.5792745098039216
+    },
+    {
+      "klasse_id": 16,
+      "klasse": "no_trucks",
+      "precision": 0.0,
+      "recall": 0.0,
+      "AP50": 0.043260869565217394,
+      "AP50_95": 0.03893478260869566
+    },
+    {
+      "klasse_id": 17,
+      "klasse": "no_entry",
+      "precision": 0.8701560520406525,
+      "recall": 1.0,
+      "AP50": 0.995,
+      "AP50_95": 0.8949999999999999
+    },
+    {
+      "klasse_id": 18,
+      "klasse": "danger_general",
+      "precision": 0.7129815729694423,
+      "recall": 0.6796355462617774,
+      "AP50": 0.6852727272727273,
+      "AP50_95": 0.6121020202020202
+    },
+    {
+      "klasse_id": 22,
+      "klasse": "bumpy_road",
+      "precision": 0.9049391699995105,
+      "recall": 0.25,
+      "AP50": 0.30499999999999994,
+      "AP50_95": 0.24795999999999996
+    },
+    {
+      "klasse_id": 23,
+      "klasse": "slippery_road",
+      "precision": 0.5249048794755397,
+      "recall": 0.5714285714285714,
+      "AP50": 0.5964322250639387,
+      "AP50_95": 0.5673614663256608
+    },
+    {
+      "klasse_id": 24,
+      "klasse": "road_narrows_right",
+      "precision": 0.0,
+      "recall": 0.0,
+      "AP50": 0.0,
+      "AP50_95": 0.0
+    },
+    {
+      "klasse_id": 25,
+      "klasse": "road_works",
+      "precision": 0.7192064818021786,
+      "recall": 0.7704237666079885,
+      "AP50": 0.8174386724386723,
+      "AP50_95": 0.6951414141414141
+    },
+    {
+      "klasse_id": 26,
+      "klasse": "traffic_signals",
+      "precision": 1.0,
+      "recall": 0.0,
+      "AP50": 0.19901010101010105,
+      "AP50_95": 0.17922474747474748
+    },
+    {
+      "klasse_id": 28,
+      "klasse": "children",
+      "precision": 0.0,
+      "recall": 0.0,
+      "AP50": 0.5458730158730158,
+      "AP50_95": 0.5110357142857143
+    },
+    {
+      "klasse_id": 29,
+      "klasse": "cyclists",
+      "precision": 0.0,
+      "recall": 0.0,
+      "AP50": 0.0995,
+      "AP50_95": 0.08955
+    },
+    {
+      "klasse_id": 30,
+      "klasse": "ice_snow",
+      "precision": 0.6701664890387963,
+      "recall": 1.0,
+      "AP50": 0.995,
+      "AP50_95": 0.8949999999999999
+    },
+    {
+      "klasse_id": 31,
+      "klasse": "wild_animals",
+      "precision": 1.0,
+      "recall": 0.0,
+      "AP50": 0.0,
+      "AP50_95": 0.0
+    },
+    {
+      "klasse_id": 32,
+      "klasse": "end_all_restrictions",
+      "precision": 0.8439189076538174,
+      "recall": 0.8,
+      "AP50": 0.795,
+      "AP50_95": 0.6955
+    },
+    {
+      "klasse_id": 33,
+      "klasse": "turn_right_ahead",
+      "precision": 0.463655050382818,
+      "recall": 0.6666666666666666,
+      "AP50": 0.764,
+      "AP50_95": 0.7277
+    },
+    {
+      "klasse_id": 34,
+      "klasse": "turn_left_ahead",
+      "precision": 0.0,
+      "recall": 0.0,
+      "AP50": 0.29782051282051275,
+      "AP50_95": 0.24891666666666662
+    },
+    {
+      "klasse_id": 35,
+      "klasse": "ahead_only",
+      "precision": 0.7719733727649959,
+      "recall": 0.8,
+      "AP50": 0.6894927536231883,
+      "AP50_95": 0.6205434782608694
+    },
+    {
+      "klasse_id": 36,
+      "klasse": "straight_or_right",
+      "precision": 1.0,
+      "recall": 0.0,
+      "AP50": 0.199,
+      "AP50_95": 0.199
+    },
+    {
+      "klasse_id": 37,
+      "klasse": "straight_or_left",
+      "precision": 0.0,
+      "recall": 0.0,
+      "AP50": 0.0,
+      "AP50_95": 0.0
+    },
+    {
+      "klasse_id": 38,
+      "klasse": "keep_right",
+      "precision": 0.960610501722188,
+      "recall": 0.967741935483871,
+      "AP50": 0.9512437275985665,
+      "AP50_95": 0.8522560278304872
+    },
+    {
+      "klasse_id": 39,
+      "klasse": "keep_left",
+      "precision": 0.0,
+      "recall": 0.0,
+      "AP50": 0.04125,
+      "AP50_95": 0.033
+    },
+    {
+      "klasse_id": 40,
+      "klasse": "roundabout",
+      "precision": 1.0,
+      "recall": 0.5798222794618544,
+      "AP50": 0.8064285714285717,
+      "AP50_95": 0.7215714285714288
+    },
+    {
+      "klasse_id": 41,
+      "klasse": "end_no_overtaking",
+      "precision": 1.0,
+      "recall": 0.0,
+      "AP50": 0.05527777777777777,
+      "AP50_95": 0.05527777777777777
+    },
+    {
+      "klasse_id": 42,
+      "klasse": "end_no_overtaking_trucks",
+      "precision": 0.626745626160701,
+      "recall": 0.5,
+      "AP50": 0.4756043956043955,
+      "AP50_95": 0.4402939560439559
+    }
+  ]
+}

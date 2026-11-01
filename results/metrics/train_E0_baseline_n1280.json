@@ -1,0 +1,35 @@
+{
+  "name": "E0_baseline_n1280",
+  "model": "yolo26n.pt",
+  "data": "C:\\IU\\DLBAIPCV01\\data\\processed\\gtsdb_yolo_super\\data.yaml",
+  "parameter": {
+    "imgsz": 1280,
+    "epochs": 100,
+    "batch": 8,
+    "patience": 30,
+    "seed": 42,
+    "deterministic": true,
+    "fliplr": 0.0,
+    "workers": 4,
+    "device": "0"
+  },
+  "trainingsdauer_min": 28.5,
+  "best_weights": "C:\\IU\\DLBAIPCV01\\runs\\train\\E0_baseline_n1280\\weights\\best.pt",
+  "save_dir": "C:\\IU\\DLBAIPCV01\\runs\\train\\E0_baseline_n1280",
+  "val_precision": 0.9891566119570434,
+  "val_recall": 0.9567803333430016,
+  "val_mAP50": 0.9811035653650254,
+  "val_mAP50_95": 0.852551678228432,
+  "system": {
+    "python": "3.12.10",
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+    "arbeitsverzeichnis": "C:\\IU\\DLBAIPCV01",
+    "torch": "2.11.0+cu128",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "cuda": "12.8",
+    "ultralytics": "8.4.165",
+    "opencv": "5.0.0"
+  }
+}

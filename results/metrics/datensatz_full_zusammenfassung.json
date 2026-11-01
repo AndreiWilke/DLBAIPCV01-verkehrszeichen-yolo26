@@ -1,0 +1,46 @@
+{
+  "modus": "full",
+  "seed": 42,
+  "val_ratio": 0.15,
+  "bilder": {
+    "train": 510,
+    "val": 90,
+    "test": 300
+  },
+  "hintergrundbilder_ohne_zeichen": {
+    "train": 79,
+    "val": 15,
+    "test": 65
+  },
+  "zeichen": {
+    "train": 722,
+    "val": 130,
+    "test": 361
+  },
+  "zeichengroesse_px_max_seite": {
+    "train": {
+      "min": 18,
+      "median": 40.0,
+      "max": 129
+    },
+    "val": {
+      "min": 17,
+      "median": 37.0,
+      "max": 124
+    },
+    "test": {
+      "min": 19,
+      "median": 39,
+      "max": 126
+    }
+  },
+  "klassen_ohne_beispiel_im_train": [],
+  "klassen_ohne_beispiel_im_test": [
+    "speed_20",
+    "curve_left",
+    "curve_right",
+    "double_curve",
+    "pedestrians"
+  ],
+  "data_yaml": "C:\\IU\\DLBAIPCV01\\data\\processed\\gtsdb_yolo_full\\data.yaml"
+}

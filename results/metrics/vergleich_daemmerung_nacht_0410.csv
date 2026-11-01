@@ -1,0 +1,5 @@
+﻿video;bedingung;modell;dauer_min;anteil_det40;anteil_det25;conf_mittel;conf_median;anteil_conf_unter_06;ereignisse;ereignisse_pro_min
+IMG_9726;Dämmerung;E3;16.0;43.0;45.8;0.852;0.908;8.1;70;4.38
+IMG_9726;Dämmerung;E9;16.0;47.8;53.7;0.777;0.828;14.8;102;6.39
+IMG_9730;Nacht;E3;10.4;38.8;41.0;0.855;0.916;8.9;49;4.71
+IMG_9730;Nacht;E9;10.4;42.5;46.3;0.788;0.844;13.4;63;6.05

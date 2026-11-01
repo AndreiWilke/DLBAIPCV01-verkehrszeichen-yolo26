@@ -1,0 +1,5 @@
+klasse_id;klasse;train;val;test
+0;prohibitory;334;62;161
+1;danger;128;28;63
+2;mandatory;97;17;49
+3;other;163;23;88

@@ -1,0 +1,8 @@
+# PyTorch mit CUDA vorher separat installieren (siehe README, Schritt 2)
+ultralytics>=8.4
+opencv-python>=4.9
+pandas>=2.0
+matplotlib>=3.8
+pyyaml>=6.0
+tqdm>=4.66
+albumentations>=2.0   # danach opencv-python erneut installieren, siehe README

@@ -1,0 +1,13 @@
+﻿Modell;Klasse;GT;TP;FP;Precision;Recall
+E3;prohibitory;171;30;6;0,833;0,175
+E3;danger;20;8;0;1,0;0,4
+E3;mandatory;158;93;2;0,979;0,589
+E3;other;66;29;11;0,725;0,439
+E9;prohibitory;171;59;10;0,855;0,345
+E9;danger;20;8;0;1,0;0,4
+E9;mandatory;158;72;4;0,947;0,456
+E9;other;66;36;4;0,9;0,545
+E11;prohibitory;171;77;12;0,865;0,45
+E11;danger;20;9;3;0,75;0,45
+E11;mandatory;158;82;2;0,976;0,519
+E11;other;66;39;10;0,796;0,591

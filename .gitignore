@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+runs/
+data/raw/*
+data/processed/*
+!data/**/.gitkeep
+videos/input/*
+videos/output/*
+*.pt
+*.cache
+
+# Aufnahmen aus den eigenen Fahrten (Kennzeichen, Personen) nicht veröffentlichen
+results/screenshots/
+results/figures/abgleich_*.jpg
+results/figures/pruefung_*.jpg
+*.mp4
+*.MOV

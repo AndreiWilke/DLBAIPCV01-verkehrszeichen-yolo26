@@ -1,0 +1,70 @@
+# Kontrollierte Versuchsreihe (Hyperparameter-Optimierung, Aufgabenstellung)
+# Prinzip: gegenüber der Baseline wird jeweils nur EIN Faktor verändert,
+# damit sich Effekte eindeutig zuordnen lassen (One-Factor-at-a-Time).
+# Aufruf: python src/run_experiments.py --config configs/experiments.yaml
+
+defaults:
+  data: data/processed/gtsdb_yolo_super/data.yaml
+  device: "0"          # "cpu", falls keine GPU
+  model: yolo26n.pt
+  imgsz: 1280
+  epochs: 100
+  batch: 8
+  patience: 30
+  fliplr: 0.0
+  workers: 2          # 4 Worker fuehrten bei 16 GB RAM zu MemoryError (E3, 29.09.2026)
+
+experiments:
+  - name: E0_baseline_n1280
+    note: Referenz, YOLO26n, 1280 px, ohne Spiegelung
+
+  - name: E1_n640
+    note: kleinere Eingabe, schneller, kleine Zeichen schlechter?
+    imgsz: 640
+
+  - name: E2_n960
+    note: Zwischenstufe Genauigkeit/Geschwindigkeit
+    imgsz: 960
+
+  - name: E3_s1280
+    note: größeres Modell YOLO26s
+    model: yolo26s.pt
+
+  - name: E4_n1280_farbaug
+    note: stärkere Helligkeits-/Sättigungsaugmentation für Licht-Robustheit
+    hsv_v: 0.6
+    hsv_s: 0.8
+
+  - name: E5_n1280_adamw
+    note: Optimierer AdamW mit kleinerer Lernrate statt Automatik
+    optimizer: AdamW
+    lr0: 0.001
+
+  - name: E6_n1280_flip
+    note: Negativkontrolle, Ultralytics-Standard fliplr 0.5 (Spiegelung verfälscht Richtungszeichen)
+    fliplr: 0.5
+
+  - name: E7_full43_n1280
+    note: alle 43 Einzelklassen statt 4 Obergruppen
+    data: data/processed/gtsdb_yolo_full/data.yaml
+
+  - name: E8_full43_n1280_flip
+    note: Negativkontrolle auf Klassenebene, 43 Klassen mit fliplr 0.5 (Obergruppen sind spiegelinvariant, E6 kann den Effekt nicht zeigen)
+    data: data/processed/gtsdb_yolo_full/data.yaml
+    fliplr: 0.5
+
+  # Verbesserungsschritt nach den Robustheitstests (30.09.2026)
+  - name: E9_s1280_robust
+    note: E3 plus Augmentation gegen Unschaerfe, Rauschen, Kompression und Dunkelheit
+    model: yolo26s.pt
+    aug_preset: robust
+
+  - name: E10_n1280_robust
+    note: E0 plus Augmentation gegen Unschaerfe, Rauschen, Kompression und Dunkelheit
+    aug_preset: robust
+
+  # Zweiter Verbesserungsschritt nach den Vergleichsfahrten Strecke 1 (05.10.2026)
+  - name: E11_s1280_robust_farbe
+    note: E9 plus Farbstich (Rot/Orange) und Blendung gegen die Nachtfehler auf Strecke 1
+    model: yolo26s.pt
+    aug_preset: robust_farbe
