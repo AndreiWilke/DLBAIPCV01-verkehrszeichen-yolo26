@@ -1,5 +1,6 @@
 # Kontrollierte Versuchsreihe (Hyperparameter-Optimierung, Aufgabenstellung)
-# Prinzip: gegenüber der Baseline wird jeweils nur EIN Faktor verändert,
+# Prinzip: gegenüber dem Bezugsmodell wird jeweils nur EIN Faktor verändert (E4: Farbaugmentierung mit
+# hsv_v und hsv_s, E5: Optimierer mit passender Lernrate),
 # damit sich Effekte eindeutig zuordnen lassen (One-Factor-at-a-Time).
 # Aufruf: python src/run_experiments.py --config configs/experiments.yaml
 
@@ -13,10 +14,13 @@ defaults:
   patience: 30
   fliplr: 0.0
   workers: 2          # 4 Worker fuehrten bei 16 GB RAM zu MemoryError (E3, 29.09.2026)
+  aug_preset: keine   # E0 bis E8 liefen ohne installiertes Albumentations; "keine" schaltet die Ultralytics-
+                      # Standardtransformationen (Blur, MedianBlur, ToGray, CLAHE) ab. E9 bis E11 setzen eigene Profile.
 
 experiments:
   - name: E0_baseline_n1280
     note: Referenz, YOLO26n, 1280 px, ohne Spiegelung
+    workers: 4          # Originallauf vom 29.09.2026 mit 4 Workern (logs/E0.log)
 
   - name: E1_n640
     note: kleinere Eingabe, schneller, kleine Zeichen schlechter?

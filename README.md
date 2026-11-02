@@ -1,9 +1,9 @@
-# Code-Grundgerüst: YOLO-Verkehrszeichenerkennung (DLBAIPCV01_D)
+# Code zum Projektbericht: YOLO-Verkehrszeichenerkennung (DLBAIPCV01_D)
 
 Lauffähiges Python-Projekt für Datenaufbereitung, Training, Evaluation, Robustheitstests
 und Video-Pipeline. Alle Befehle werden im Ordner `02_Code` in der PowerShell (VS Code-Terminal) ausgeführt.
 
-Getestet am 29.09.2026 mit synthetischen Daten: in der Cloud (Python 3.11, OpenCV 4.13, CPU) und auf dem Zielrechner (Python 3.12, OpenCV 5.0, RTX 3060).
+Das Grundgerüst wurde am 29.09.2026 mit synthetischen Daten getestet: in der Cloud (Python 3.11, OpenCV 4.13, CPU) und auf dem Zielrechner (Python 3.12, OpenCV 5.0, RTX 3060).
 Zielrechner: Windows 11, Python 3.12, NVIDIA RTX 3060 (12 GB), Ryzen 7 5800X, 16 GB RAM.
 
 ## Ordnerstruktur
@@ -19,8 +19,7 @@ Code und kleine Ergebnisse liegen im Projektordner (OneDrive). Große Dateien li
 ├── configs/experiments.yaml      Versuchsreihe (Hyperparameter, One-Factor-at-a-Time)
 ├── results/metrics/              CSV/JSON für Tabellen im Bericht
 ├── results/figures/              Grafiken für den Bericht
-├── results/screenshots/          Screenshots aus dem Demo-Video
-├── report/                       Berichtsentwurf
+├── results/cvat/                 Grundwahrheit der eigenen Testmenge (Rahmen und Klassen)
 └── src/
     ├── common.py                 Klassen, Obergruppen, Pfade, Systeminfo
     ├── check_setup.py            Umgebung prüfen
@@ -129,11 +128,11 @@ Ergebnis: `results/metrics/experimente.csv` (mAP, Precision, Recall, ms/Bild, FP
 ## Schritt 6: Robustheit unter Licht- und Wetterbedingungen
 
 ```powershell
-python src/robustness_tests.py --weights runs/train/E0_baseline_n1280/weights/best.pt --data data/processed/gtsdb_yolo_super/data.yaml --imgsz 1280 --device 0
+python src/robustness_tests.py --weights runs/train/E0_baseline_n1280/weights/best.pt --data data/processed/gtsdb_yolo_super/data.yaml --imgsz 1280 --device 0 --name E0
 ```
 
 Bedingungen: dunkel, nacht, ueberbelichtung, nebel, regen, bewegungsunschaerfe, rauschen, jpeg_kompression.
-Ergebnis: `results/metrics/robustheit_robust.csv` und `results/figures/robustheit_beispiele.jpg`.
+Ergebnis: `results/metrics/robustheit_<name>.csv` (im Bericht E0, E3, E9, E10, E11) und `results/figures/robustheit_beispiele.jpg`.
 
 ## Schritt 7: Geschwindigkeit (Genauigkeit versus Echtzeit)
 
@@ -217,6 +216,9 @@ pip install opencv-python==5.0.0.93
 ```
 
 Die Experimente E0 bis E8 liefen ohne Albumentations, also ohne die Ultralytics-Standardtransformationen (Blur, CLAHE usw. mit je 1 %).
+Beleg: In den Trainingsprotokollen von E0 bis E8 fehlt die Zeile `albumentations:`, die Ultralytics bei installiertem Paket ausgibt.
+Damit eine Wiederholung in der heutigen Umgebung (mit Albumentations) gleich läuft, setzt `configs/experiments.yaml` für
+E0 bis E8 `aug_preset: keine` (leere Liste). Bei den Seed-Läufen vom 02.11.2026 zeigt das Protokoll entsprechend `albumentations:` ohne Einträge.
 
 Hinweis Datenschutz: Die Aufgabenstellung verlangt die Anonymisierung personenbezogener Daten.
 Kennzeichen und Gesichter vor Upload des Demo-Videos und vor Verwendung von Screenshots unkenntlich machen.
@@ -224,3 +226,16 @@ Kennzeichen und Gesichter vor Upload des Demo-Videos und vor Verwendung von Scre
 ## Hinweis zu diesem Repository
 
 Code, Konfigurationen und Messdateien zum Projektbericht DLBAIPCV01_D (IU Internationale Hochschule, Projekt: Computer Vision). Die eigenen Fahrvideos, Bildausschnitte daraus, Modellgewichte und Trainingsläufe sind nicht enthalten (Datenschutz und Dateigröße). Die Auswertungen in `results/metrics` sind vollständig.
+
+## Auswertung der eigenen Testmenge und Abbildungen
+
+```powershell
+python src/eval_strecke.py --modelle E3 E9 E11                 # cvat_strecke1_pr.csv, _map.csv, _groesse.csv, _klassen.csv
+python src/eval_strecke.py --modelle E3_seed1 E3_seed2 E9_seed1 E9_seed2 --suffix _seeds
+python src/eval_teilmengen.py                                  # Schildstellen gegen Zufallspunkte
+python src/quote_strecke.py                                    # Wiederfindungsrate (Tab. D3)
+python src/abbildungen.py                                      # Abb. 1 bis 3 nach results/figures
+```
+
+`eval_strecke.py` vergleicht die Erkennungen auf den 240 Testbildern mit der Grundwahrheit aus CVAT (IoU ab 0,5,
+Konfidenz 0,4 und 0,25). Der Erkennungsverlauf von E11 je Fahrt liegt als `results/metrics/route/det_<video>_E11.csv` bei.

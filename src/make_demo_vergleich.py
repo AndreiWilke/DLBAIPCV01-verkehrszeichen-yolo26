@@ -1,6 +1,6 @@
 """Demo-Video: dieselbe Stelle von Strecke 1 bei Tag, Dämmerung und Nacht nebeneinander (2x2-Raster).
 
-Fassung 3 (05.10.2026):
+Fassung 4 (02.11.2026, sonst wie Fassung 3 vom 05.10.2026):
 - Alle drei Fahrten laufen in Originalgeschwindigkeit (30 FPS, kein Zeitstrecken). Synchronisiert wird nur
   der Startpunkt jedes Abschnitts über den bildbasierten Streckenabgleich (zeitabgleich_strecke1.csv).
   Gewählt werden Abschnitte, in denen alle drei Fahrten etwa gleich schnell fahren (Geschwindigkeits-
@@ -9,6 +9,7 @@ Fassung 3 (05.10.2026):
 - Erkennung direkt im Skript mit dem gewählten Modell (conf ab 0,4) auf den Originalvideos; Boxen und
   Beschriftungen werden nach dem Verkleinern gezeichnet, damit sie lesbar bleiben.
 - Lupe im vierten Feld: die aktuell sicherste Erkennung jeder Fahrt vergrößert.
+- Offline gerendert: keine Threads und keine zeitliche Stabilisierung wie in run_video_pipeline.py.
 - Datenschutz: Kennzeichen (YOLO11-Modell morsetechlab/yolov11-license-plate-detection, AGPL-3.0) und
   Gesichter (OpenCV YuNet) werden in voller Auflösung erkannt und verpixelt, Boxen 10 Frames gehalten.
   Seit 02.11.2026 ohne Ausnahme: auch Bereiche, die ein erkanntes Verkehrszeichen überdecken, werden verpixelt.
@@ -251,7 +252,7 @@ def main():
     for _ in range(30 * 5):
         put(ende)
     wr.close()
-    meta = {"fassung": 3, "modell": args.modell, "abschnitte": protokoll,
+    meta = {"fassung": 4, "modell": args.modell, "abschnitte": protokoll,
             "anonymisierung": {"kennzeichen_boxen": anon.n_kz, "gesicht_boxen": anon.n_gesicht}}
     ziel.with_suffix(".json").write_text(json.dumps(meta, indent=1, ensure_ascii=False), encoding="utf-8")
     print(f"Demo-Video: {ziel}", meta["anonymisierung"])
