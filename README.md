@@ -124,7 +124,7 @@ python src/train_yolo.py --data data/processed/gtsdb_yolo_super/data.yaml --name
 
 Voreinstellungen: YOLO26n, imgsz 1280, 100 Epochen, Batch 8, Patience 30, Seed 42, **fliplr 0.0**.
 Horizontales Spiegeln (Ultralytics-Standard 0.5) ist bei Verkehrszeichen fachlich falsch, weil es
-Richtungszeichen vertauscht. E6 war als Kontrollversuch gedacht. Für die vier Obergruppen schnitt E6 aber leicht besser ab, weil die Obergruppe beim Spiegeln erhalten bleibt.
+Richtungszeichen vertauscht. E6 war als Kontrollversuch gedacht. Für die vier Obergruppen lag E6 leicht vorn (0,895 statt 0,882), der Unterschied liegt aber im Bereich der Seed-Streuung von E0.
 Bei DataLoader-Fehlern unter Windows `--workers 0` ergänzen.
 
 ## Schritt 5: Versuchsreihe (Hyperparameter-Optimierung)
