@@ -40,7 +40,7 @@ Code und kleine Ergebnisse liegen im Projektordner (OneDrive). Große Dateien li
     ├── route_features.py, route_match.py   Streckenabgleich der drei Fahrten
     ├── det_verlauf.py            Erkennungsverlauf je Fahrt
     ├── eval_strecke.py, eval_teilmengen.py, quote_strecke.py   Auswertung der eigenen Testmenge
-    ├── make_demo_vergleich.py    Demo-Video (2x2-Raster, offline)
+    ├── make_demo_vergleich.py    Demo-Video (2x2-Raster, offline), Zähler und Abschnitte in results/metrics/demo_video_meta.json
     └── abbildungen.py            Abb. 1 bis 3 des Berichts
 
 C:\IU\DLBAIPCV01\  (Arbeitsverzeichnis, nicht in OneDrive)
@@ -208,7 +208,7 @@ Ergebnis: zusätzliche Zeilen `*_seed1` und `*_seed2` in `results/metrics/experi
 ## Streckenabgleich der eigenen Fahrten
 
 `src/route_features.py` berechnet je Video alle 0,5 s einen ResNet18-Merkmalsvektor (Ergebnis
-`results/metrics/route/route_<video>.npz`), `src/route_match.py` die Distanzmatrizen gegen die Tagfahrt. Beide Skripte
+`results/metrics/route/route_<video>.npz`, zusätzlich im Feld `tiny` stark verkleinerte, normalisierte Graustufenbilder mit 64 × 31 Pixeln), `src/route_match.py` die Distanzmatrizen gegen die Tagfahrt. Beide Skripte
 liefen im Arbeitsverzeichnis. Den Viterbi-Pfad durch die gefilterte Matrix berechnete ein einmaliges Skript, das nicht
 gesichert wurde. Sein Ergebnis liegt als `results/metrics/route/zeitabgleich_strecke1.csv` vor.
 

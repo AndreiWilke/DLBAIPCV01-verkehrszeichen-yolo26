@@ -112,8 +112,9 @@ def karte(zeilen, sub=None):
     for i, z in enumerate(zeilen):
         items.append(((160, y), z, 46 if i == 0 else 34, i == 0, (255, 255, 255), None))
         y += 90 if i == 0 else 56
-    if sub:
-        items.append(((160, H - 120), sub, 26, False, (190, 190, 190), None))
+    subs = [sub] if isinstance(sub, str) else (sub or [])
+    for j, s_ in enumerate(subs):
+        items.append(((160, H - 120 - 38 * (len(subs) - 1 - j)), s_, 26, False, (190, 190, 190), None))
     return texte(img, items)
 
 
@@ -244,15 +245,23 @@ def main():
 
     summ = {name: json.loads((METRICS_DIR / f"video_{vid}_{args.modell}_summary.json").read_text(encoding="utf-8"))
             for vid, _, name, _ in FAHRTEN}
+    # Einzelbild-Recall gegen die CVAT-Grundwahrheit (415 Schilder, Konfidenz 0,4)
+    with open(ROOT / "results/metrics/cvat_strecke1_pr.csv", encoding="utf-8-sig") as f:
+        pr = {r["Bedingung"]: r for r in csv.DictReader(f, delimiter=";")
+              if r["Modell"] == args.modell and zahl(r["conf"]) == 0.4}
+    rc = lambda b: de(zahl(pr[b]["Recall"]), 2)
     ende = karte(["Ergebnis Strecke 1",
                   *[f"Wiedergefundene Schildstellen {mm}: {q.get(('Tag', mm))} / {q.get(('Dämmerung', mm))} / {q.get(('Nacht', mm))} %"
                     for mm in args.vergleich],
-                  "Latenz " + args.modell + " je Bild: " + ", ".join(f"{n} {de(summ[n]['latenz_ms_mittel'])} ms" for _, _, n, _ in FAHRTEN)],
-                 "Tag / Dämmerung / Nacht. Referenz modellbasiert, Annotation in CVAT folgt.")
+                  f"Einzelbild-Recall {args.modell} (CVAT, {pr['alle']['GT']} Schilder): "
+                  f"{rc('tag')} / {rc('daemmerung')} / {rc('nacht')}, gesamt {rc('alle')}",
+                  "Modellaufruf " + args.modell + " je Bild: " + ", ".join(f"{n} {de(summ[n]['latenz_ms_mittel'])} ms" for _, _, n, _ in FAHRTEN)],
+                 ["Tag / Dämmerung / Nacht. Schildstellen: modellbasierte Referenz, mindestens eine Erkennung im Zeitfenster von ±1,5 s.",
+                  "Modellaufruf ohne Kamera, Puffer und Anzeige. Einzelbild-Auswertung im Bericht (Tab. 2, Anhang D)."])
     for _ in range(30 * 5):
         put(ende)
     wr.close()
-    meta = {"fassung": 4, "modell": args.modell, "abschnitte": protokoll,
+    meta = {"fassung": 5, "modell": args.modell, "abschnitte": protokoll,
             "anonymisierung": {"kennzeichen_boxen": anon.n_kz, "gesicht_boxen": anon.n_gesicht}}
     ziel.with_suffix(".json").write_text(json.dumps(meta, indent=1, ensure_ascii=False), encoding="utf-8")
     print(f"Demo-Video: {ziel}", meta["anonymisierung"])
