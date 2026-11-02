@@ -64,7 +64,10 @@ def robust_farbe_augmentations() -> list:
     ]
 
 
-AUG_PRESETS = {"robust": robust_augmentations, "robust_farbe": robust_farbe_augmentations}
+# "keine": leere Liste schaltet die Albumentations-Standardtransformationen von Ultralytics ab
+# (Blur, MedianBlur, ToGray, CLAHE mit je p = 0,01). So entsprechen Wiederholungen von E0 und E3 den
+# Originallaeufen, die ohne installiertes Albumentations liefen (02.11.2026).
+AUG_PRESETS = {"robust": robust_augmentations, "robust_farbe": robust_farbe_augmentations, "keine": lambda: []}
 
 
 def train(data: str | Path, name: str, device: str | None = None, **overrides) -> dict:

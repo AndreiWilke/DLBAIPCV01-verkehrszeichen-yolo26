@@ -1,6 +1,8 @@
 # Wiederholungslaeufe mit anderen Seeds (01.11.2026)
 # Zweck: Streuung der Ergebnisse abschaetzen. Die Originallaeufe E0, E3 und E9 nutzen seed 42.
 # Datenaufteilung (train/val/test) bleibt unveraendert, es aendert sich nur der Trainings-Seed.
+# E0 und E3 mit aug_preset keine: Die Originallaeufe liefen ohne installiertes Albumentations, also ohne die
+# Ultralytics-Standardtransformationen. E9 ersetzt diese ohnehin durch das Profil robust.
 # Aufruf: python src/run_experiments.py --config configs/experiments_seeds.yaml --workers 2
 
 defaults:
@@ -18,17 +20,21 @@ experiments:
   - name: E0_baseline_n1280_seed1
     note: Wiederholung E0 mit seed 1
     seed: 1
+    aug_preset: keine
   - name: E0_baseline_n1280_seed2
     note: Wiederholung E0 mit seed 2
     seed: 2
+    aug_preset: keine
   - name: E3_s1280_seed1
     note: Wiederholung E3 mit seed 1
     model: yolo26s.pt
     seed: 1
+    aug_preset: keine
   - name: E3_s1280_seed2
     note: Wiederholung E3 mit seed 2
     model: yolo26s.pt
     seed: 2
+    aug_preset: keine
   - name: E9_s1280_robust_seed1
     note: Wiederholung E9 mit seed 1
     model: yolo26s.pt

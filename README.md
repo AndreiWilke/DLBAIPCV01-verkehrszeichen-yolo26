@@ -199,6 +199,13 @@ Ergebnis: zusätzliche Zeilen `*_seed1` und `*_seed2` in `results/metrics/experi
 liefen im Arbeitsverzeichnis. Den Viterbi-Pfad durch die gefilterte Matrix berechnete ein einmaliges Skript, das nicht
 gesichert wurde. Sein Ergebnis liegt als `results/metrics/route/zeitabgleich_strecke1.csv` vor.
 
+## Eigene Testmenge
+
+`src/anonym_cvat.py` verpixelte die 240 Testbilder vor dem Upload nach CVAT, `src/det_verlauf.py` schrieb den
+Erkennungsverlauf je Fahrt (`results/metrics/route/det_*.csv`). Die Grundwahrheit liegt als
+`results/cvat/cvat_annotation_api.txt` bei (nur Rahmenkoordinaten und Klassen, keine Bilder). `src/eval_teilmengen.py`
+vergleicht den Recall an den 50 Schildstellen mit den 30 Zufallspunkten (`results/metrics/cvat_strecke1_teilmengen.csv`).
+
 ## Hinweis Albumentations (30.09.2026)
 
 Für den Verbesserungsschritt (E9, E10, `aug_preset: robust`) wurde `albumentations` nachinstalliert. Das Paket zieht

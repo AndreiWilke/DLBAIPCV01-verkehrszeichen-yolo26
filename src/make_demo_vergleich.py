@@ -10,8 +10,8 @@ Fassung 3 (05.10.2026):
   Beschriftungen werden nach dem Verkleinern gezeichnet, damit sie lesbar bleiben.
 - Lupe im vierten Feld: die aktuell sicherste Erkennung jeder Fahrt vergrößert.
 - Datenschutz: Kennzeichen (YOLO11-Modell morsetechlab/yolov11-license-plate-detection, AGPL-3.0) und
-  Gesichter (OpenCV YuNet) werden in voller Auflösung erkannt und verpixelt, Boxen 10 Frames gehalten;
-  Bereiche, die ein erkanntes Verkehrszeichen überdecken, bleiben frei.
+  Gesichter (OpenCV YuNet) werden in voller Auflösung erkannt und verpixelt, Boxen 10 Frames gehalten.
+  Seit 02.11.2026 ohne Ausnahme: auch Bereiche, die ein erkanntes Verkehrszeichen überdecken, werden verpixelt.
 
 Aufruf (im Ordner 02_Code):
   python src/make_demo_vergleich.py --modell E11 --abschnitte 5 --sekunden 10
@@ -98,8 +98,6 @@ class Anonymisierer:
             a, b, c, d = int(max(0, x1 - dx)), int(max(0, y1 - dy)), int(min(w, x2 + dx)), int(min(h, y2 + dy))
             if c - a < 2 or d - b < 2:
                 continue
-            if any(min(c, s[2]) > max(a, s[0]) and min(d, s[3]) > max(b, s[1]) for s in schilder):
-                continue
             roi = img[b:d, a:c]
             k = max(2, min(roi.shape[:2]) // 5)
             small = cv2.resize(roi, (max(1, roi.shape[1] // k), max(1, roi.shape[0] // k)), interpolation=cv2.INTER_AREA)
@@ -174,7 +172,7 @@ def main():
     put = lambda img: wr.send(np.ascontiguousarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)))
 
     titel = karte(["YOLO-Verkehrszeichenerkennung: eine Strecke, drei Lichtverhältnisse",
-                   f"Modell {args.modell} (YOLO26s, 1280 px, robust trainiert), Echtzeit auf RTX 3060",
+                   f"Modell {args.modell} (YOLO26s, 1280 px, robust trainiert), offline gerendert",
                    "Tag, Dämmerung und Nacht an derselben Stelle, alle in Originalgeschwindigkeit",
                    "Rechts unten: Lupe auf das jeweils sicherste erkannte Zeichen"],
                   "DLBAIPCV01_D, Berlin. Kennzeichen und Gesichter automatisch verpixelt.")
