@@ -1,0 +1,17 @@
+﻿Modell;Klasse;GT;TP;FP;Precision;Recall
+E3_seed1;prohibitory;171;51;15;0,773;0,298
+E3_seed1;danger;20;9;0;1,0;0,45
+E3_seed1;mandatory;158;94;8;0,922;0,595
+E3_seed1;other;66;37;17;0,685;0,561
+E3_seed2;prohibitory;171;65;13;0,833;0,38
+E3_seed2;danger;20;8;0;1,0;0,4
+E3_seed2;mandatory;158;97;8;0,924;0,614
+E3_seed2;other;66;40;20;0,667;0,606
+E9_seed1;prohibitory;171;61;10;0,859;0,357
+E9_seed1;danger;20;9;1;0,9;0,45
+E9_seed1;mandatory;158;81;8;0,91;0,513
+E9_seed1;other;66;36;7;0,837;0,545
+E9_seed2;prohibitory;171;91;23;0,798;0,532
+E9_seed2;danger;20;9;0;1,0;0,45
+E9_seed2;mandatory;158;88;1;0,989;0,557
+E9_seed2;other;66;36;15;0,706;0,545

@@ -1,0 +1,41 @@
+# Wiederholungslaeufe mit anderen Seeds (01.11.2026)
+# Zweck: Streuung der Ergebnisse abschaetzen. Die Originallaeufe E0, E3 und E9 nutzen seed 42.
+# Datenaufteilung (train/val/test) bleibt unveraendert, es aendert sich nur der Trainings-Seed.
+# Aufruf: python src/run_experiments.py --config configs/experiments_seeds.yaml --workers 2
+
+defaults:
+  data: data/processed/gtsdb_yolo_super/data.yaml
+  device: "0"
+  model: yolo26n.pt
+  imgsz: 1280
+  epochs: 100
+  batch: 8
+  patience: 30
+  fliplr: 0.0
+  workers: 2
+
+experiments:
+  - name: E0_baseline_n1280_seed1
+    note: Wiederholung E0 mit seed 1
+    seed: 1
+  - name: E0_baseline_n1280_seed2
+    note: Wiederholung E0 mit seed 2
+    seed: 2
+  - name: E3_s1280_seed1
+    note: Wiederholung E3 mit seed 1
+    model: yolo26s.pt
+    seed: 1
+  - name: E3_s1280_seed2
+    note: Wiederholung E3 mit seed 2
+    model: yolo26s.pt
+    seed: 2
+  - name: E9_s1280_robust_seed1
+    note: Wiederholung E9 mit seed 1
+    model: yolo26s.pt
+    aug_preset: robust
+    seed: 1
+  - name: E9_s1280_robust_seed2
+    note: Wiederholung E9 mit seed 2
+    model: yolo26s.pt
+    aug_preset: robust
+    seed: 2

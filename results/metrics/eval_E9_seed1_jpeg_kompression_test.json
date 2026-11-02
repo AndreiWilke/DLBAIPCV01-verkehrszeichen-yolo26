@@ -1,0 +1,65 @@
+{
+  "name": "E9_seed1_jpeg_kompression",
+  "weights": "C:\\IU\\DLBAIPCV01\\runs\\train\\E9_s1280_robust_seed1\\weights\\best.pt",
+  "data": "C:\\IU\\DLBAIPCV01\\data\\processed\\robustheit\\gtsdb_yolo_super\\jpeg_kompression\\data.yaml",
+  "split": "test",
+  "imgsz": 1280,
+  "precision": 0.9802766725596788,
+  "recall": 0.9174398076642633,
+  "mAP50": 0.9549226198904006,
+  "mAP75": 0.9481490322456096,
+  "mAP50_95": 0.8345247805361378,
+  "speed_ms_pro_bild": {
+    "preprocess": 2.065,
+    "inference": 24.046,
+    "loss": 0.001,
+    "postprocess": 0.759
+  },
+  "plots_dir": "C:\\IU\\DLBAIPCV01\\runs\\eval\\E9_seed1_jpeg_kompression",
+  "system": {
+    "python": "3.12.10",
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+    "arbeitsverzeichnis": "C:\\IU\\DLBAIPCV01",
+    "torch": "2.11.0+cu128",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "cuda": "12.8",
+    "ultralytics": "8.4.165",
+    "opencv": "5.0.0"
+  },
+  "je_klasse": [
+    {
+      "klasse_id": 0,
+      "klasse": "prohibitory",
+      "precision": 0.9933188494699563,
+      "recall": 0.9234551903945643,
+      "AP50": 0.9824444529200164,
+      "AP50_95": 0.8800919829567967
+    },
+    {
+      "klasse_id": 1,
+      "klasse": "danger",
+      "precision": 0.9820980435213135,
+      "recall": 0.9523809523809523,
+      "AP50": 0.9592899050905952,
+      "AP50_95": 0.8316192560096676
+    },
+    {
+      "klasse_id": 2,
+      "klasse": "mandatory",
+      "precision": 0.9800814200247373,
+      "recall": 0.8367346938775511,
+      "AP50": 0.8948714315338355,
+      "AP50_95": 0.7885226365780373
+    },
+    {
+      "klasse_id": 3,
+      "klasse": "other",
+      "precision": 0.965608377222708,
+      "recall": 0.9571883940039854,
+      "AP50": 0.983084690017155,
+      "AP50_95": 0.8378652466000498
+    }
+  ]
+}

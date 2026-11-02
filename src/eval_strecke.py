@@ -25,7 +25,10 @@ import yaml
 
 from common import DATA_DIR, METRICS_DIR, RUNS_DIR, SUPER_CLASSES
 
-GEWICHTE = {"E3": "E3_s1280", "E9": "E9_s1280_robust", "E11": "E11_s1280_robust_farbe", "E0": "E0_baseline"}
+GEWICHTE = {"E3": "E3_s1280", "E9": "E9_s1280_robust", "E11": "E11_s1280_robust_farbe", "E0": "E0_baseline",
+            # Wiederholungslaeufe mit weiteren Seeds (02.11.2026)
+            "E3_seed1": "E3_s1280_seed1", "E3_seed2": "E3_s1280_seed2",
+            "E9_seed1": "E9_s1280_robust_seed1", "E9_seed2": "E9_s1280_robust_seed2"}
 KUERZEL = {"p": "prohibitory", "d": "danger", "m": "mandatory", "o": "other"}
 BED = ["tag", "daemmerung", "nacht"]
 GROESSE = [(0, 20), (20, 32), (32, 64), (64, 10_000)]
@@ -97,6 +100,7 @@ def main() -> None:
     ap.add_argument("--device", default="0")
     ap.add_argument("--bilder", choices=["original", "anonym"], default="original")
     ap.add_argument("--ohne-map", action="store_true")
+    ap.add_argument("--suffix", default="", help="Zusatz fuer die Ergebnisdateien, z. B. _seeds")
     a = ap.parse_args()
 
     basis = DATA_DIR / "eigene_annotation"
@@ -171,7 +175,7 @@ def main() -> None:
                 mp.append([m, c, float(v.box.mp), float(v.box.mr), float(v.box.map50), float(v.box.map)])
         print(m, "fertig")
 
-    s = "" if a.bilder == "original" else "_anonym"
+    s = ("" if a.bilder == "original" else "_anonym") + a.suffix
     schreibe_csv(METRICS_DIR / f"cvat_strecke1_pr{s}.csv",
                  ["Modell", "conf", "Bedingung", "GT", "TP", "FP", "FN", "Precision", "Recall", "F1", "Recall_ohne_Klasse"], pr)
     schreibe_csv(METRICS_DIR / f"cvat_strecke1_groesse{s}.csv", ["Modell", "Bedingung", "Groesse_px", "GT", "gefunden", "Recall"], groesse)

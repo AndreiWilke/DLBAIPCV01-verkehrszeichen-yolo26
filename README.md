@@ -178,7 +178,26 @@ Erkennungsschleife und Anzeige-Thread werden über 99 % der Frames verarbeitet.
    Ohne diese Prüfung würde das Modell an seinen eigenen Vorschlägen gemessen (Zirkelschluss).
 5. Export "YOLO 1.1" und mit `import_cvat.py` übernehmen.
 
-Im Bericht als "modellgestützte Annotation mit vollständiger manueller Prüfung" beschreiben.
+
+## Wiederholungsläufe mit weiteren Seeds (01.11.2026)
+
+E0, E3 und E9 wurden mit den Seeds 1 und 2 wiederholt (Originalläufe: Seed 42), um die Streuung zwischen
+Trainingsläufen abzuschätzen. Die Datenaufteilung bleibt gleich, nur der Trainings-Seed ändert sich.
+
+```powershell
+python src/run_experiments.py --config configs/experiments_seeds.yaml --workers 2
+python src/robustness_tests.py --weights runs/train/E3_s1280_seed1/weights/best.pt --data data/processed/gtsdb_yolo_super/data.yaml --imgsz 1280 --device 0 --name E3_seed1
+```
+
+Ergebnis: zusätzliche Zeilen `*_seed1` und `*_seed2` in `results/metrics/experimente.csv` sowie
+`results/metrics/robustheit_E3_seed1.csv` usw.
+
+## Streckenabgleich der eigenen Fahrten
+
+`src/route_features.py` berechnet je Video alle 0,5 s einen ResNet18-Merkmalsvektor (Ergebnis
+`results/metrics/route/route_<video>.npz`), `src/route_match.py` die Distanzmatrizen gegen die Tagfahrt. Beide Skripte
+liefen im Arbeitsverzeichnis. Den Viterbi-Pfad durch die gefilterte Matrix berechnete ein einmaliges Skript, das nicht
+gesichert wurde. Sein Ergebnis liegt als `results/metrics/route/zeitabgleich_strecke1.csv` vor.
 
 ## Hinweis Albumentations (30.09.2026)
 
