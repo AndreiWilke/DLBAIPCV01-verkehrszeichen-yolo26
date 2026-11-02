@@ -1,7 +1,8 @@
 """Recall auf der eigenen Strecke getrennt nach Schildstellen und Zufallspunkten (02.11.2026).
 
 Die 50 Schildstellen (Bilder S00 bis S49) wurden dort gewählt, wo E3 oder E9 bei Tag ein Schild erkannt hatten,
-die 30 Zufallspunkte (Z00 bis Z29) unabhängig von Modellerkennungen. Der Vergleich zeigt, wie stark die Auswahl
+die 30 Zufallspunkte (Z00 bis Z29) zufällig mit mindestens 3 s Abstand zu den Schildstellen (extract_strecke.py),
+also nicht ganz unabhängig von den Modellerkennungen. Z02 bis Z06 zeigen denselben Ampelhalt. Der Vergleich zeigt, wie stark die Auswahl
 den Recall verzerrt. Grundwahrheit und Zuordnung wie in eval_strecke.py (IoU ab 0,5, Klasse muss stimmen).
 
 Aufruf (im Ordner 02_Code, nach eval_strecke.py):  python src/eval_teilmengen.py --modelle E3 E9 E11

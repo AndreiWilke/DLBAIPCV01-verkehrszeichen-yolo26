@@ -20,15 +20,17 @@ defaults:
 experiments:
   - name: E0_baseline_n1280
     note: Referenz, YOLO26n, 1280 px, ohne Spiegelung
-    workers: 4          # Originallauf vom 29.09.2026 mit 4 Workern (logs/E0.log)
+    workers: 4          # Originallauf vom 29.09.2026 mit 4 Workern (train_E0_baseline_n1280.json)
 
   - name: E1_n640
     note: kleinere Eingabe, schneller, kleine Zeichen schlechter?
     imgsz: 640
+    workers: 4          # wie im Originallauf (train_E1_n640.json)
 
   - name: E2_n960
     note: Zwischenstufe Genauigkeit/Geschwindigkeit
     imgsz: 960
+    workers: 4          # wie im Originallauf (train_E2_n960.json)
 
   - name: E3_s1280
     note: größeres Modell YOLO26s

@@ -2,6 +2,7 @@
 
 Lauffähiges Python-Projekt für Datenaufbereitung, Training, Evaluation, Robustheitstests
 und Video-Pipeline. Alle Befehle werden im Ordner `02_Code` in der PowerShell (VS Code-Terminal) ausgeführt.
+Der Ordner `02_Code` des Projektpakets entspricht dem Wurzelordner dieses Repositorys.
 
 Das Grundgerüst wurde am 29.09.2026 mit synthetischen Daten getestet: in der Cloud (Python 3.11, OpenCV 4.13, CPU) und auf dem Zielrechner (Python 3.12, OpenCV 5.0, RTX 3060).
 Zielrechner: Windows 11, Python 3.12, NVIDIA RTX 3060 (12 GB), Ryzen 7 5800X, 16 GB RAM.
@@ -17,6 +18,8 @@ Code und kleine Ergebnisse liegen im Projektordner (OneDrive). Große Dateien li
 ```
 02_Code/  (OneDrive)
 ├── configs/experiments.yaml      Versuchsreihe (Hyperparameter, One-Factor-at-a-Time)
+├── configs/experiments_seeds.yaml Wiederholungsläufe mit Seed 1 und 2
+├── logs/                         Auszug aus den Trainingsprotokollen (Nachweis Albumentations)
 ├── results/metrics/              CSV/JSON für Tabellen im Bericht
 ├── results/figures/              Grafiken für den Bericht
 ├── results/cvat/                 Grundwahrheit der eigenen Testmenge (Rahmen und Klassen)
@@ -30,7 +33,15 @@ Code und kleine Ergebnisse liegen im Projektordner (OneDrive). Große Dateien li
     ├── robustness_tests.py       Licht- und Wetterbedingungen simulieren und auswerten
     ├── benchmark_speed.py        Latenz und FPS je Modell, Bildgröße, GPU/CPU
     ├── run_video_pipeline.py     Video-Pipeline mit Echtzeitsimulation und Stabilisierung
-    └── extract_frames.py         Frames aus eigenem Video für die Annotation
+    ├── extract_frames.py         Frames aus eigenem Video für die Annotation (früher Ablauf, Schritt 8)
+    ├── import_cvat.py, merge_frames.py, make_demo.py   früher Ablauf mit Einzelvideos (Schritt 8)
+    ├── extract_strecke.py        240 Testbilder der Strecke (50 Schildstellen, 30 Zufallspunkte)
+    ├── anonym_cvat.py            Verpixeln vor dem Upload nach CVAT
+    ├── route_features.py, route_match.py   Streckenabgleich der drei Fahrten
+    ├── det_verlauf.py            Erkennungsverlauf je Fahrt
+    ├── eval_strecke.py, eval_teilmengen.py, quote_strecke.py   Auswertung der eigenen Testmenge
+    ├── make_demo_vergleich.py    Demo-Video (2x2-Raster, offline)
+    └── abbildungen.py            Abb. 1 bis 3 des Berichts
 
 C:\IU\DLBAIPCV01\  (Arbeitsverzeichnis, nicht in OneDrive)
 ├── .venv/                        Python-Umgebung
@@ -113,7 +124,7 @@ python src/train_yolo.py --data data/processed/gtsdb_yolo_super/data.yaml --name
 
 Voreinstellungen: YOLO26n, imgsz 1280, 100 Epochen, Batch 8, Patience 30, Seed 42, **fliplr 0.0**.
 Horizontales Spiegeln (Ultralytics-Standard 0.5) ist bei Verkehrszeichen fachlich falsch, weil es
-Richtungszeichen vertauscht. Das Experiment E6 zeigt den Effekt als Negativkontrolle.
+Richtungszeichen vertauscht. E6 war als Kontrollversuch gedacht. Für die vier Obergruppen schnitt E6 aber leicht besser ab, weil die Obergruppe beim Spiegeln erhalten bleibt.
 Bei DataLoader-Fehlern unter Windows `--workers 0` ergänzen.
 
 ## Schritt 5: Versuchsreihe (Hyperparameter-Optimierung)
@@ -140,7 +151,10 @@ Ergebnis: `results/metrics/robustheit_<name>.csv` (im Bericht E0, E3, E9, E10, E
 python src/benchmark_speed.py --weights runs/train/E0_baseline_n1280/weights/best.pt runs/train/E3_s1280/weights/best.pt --imgsz 640 960 1280 --devices 0 cpu --images data/processed/gtsdb_yolo_super/images/test
 ```
 
-## Schritt 8: Eigenes Fahrvideo
+## Schritt 8: Eigenes Fahrvideo (früher Ablauf vom 1. Oktober)
+
+Die Befehle in diesem Abschnitt zeigen den ersten Ablauf mit Einzelvideos. Die eigene Testmenge des Berichts entstand
+später mit `extract_strecke.py` und wurde mit `eval_strecke.py` ausgewertet (Abschnitt "Auswertung der eigenen Testmenge").
 
 ```powershell
 # Demo-Video mit Echtzeitsimulation und zeitlicher Stabilisierung
@@ -202,7 +216,8 @@ gesichert wurde. Sein Ergebnis liegt als `results/metrics/route/zeitabgleich_str
 
 `src/anonym_cvat.py` verpixelte die 240 Testbilder vor dem Upload nach CVAT, `src/det_verlauf.py` schrieb den
 Erkennungsverlauf je Fahrt (`results/metrics/route/det_*.csv`). Die Grundwahrheit liegt als
-`results/cvat/cvat_annotation_api.txt` bei (nur Rahmenkoordinaten und Klassen, keine Bilder). `src/eval_teilmengen.py`
+`results/cvat/cvat_annotation_api.txt` bei (nur Rahmenkoordinaten und Klassen, keine Bilder). Die Auswertungsskripte lesen sie aus
+`data/eigene_annotation/strecke1/` im Arbeitsverzeichnis, für einen Neulauf die Datei dorthin kopieren. `src/eval_teilmengen.py`
 vergleicht den Recall an den 50 Schildstellen mit den 30 Zufallspunkten (`results/metrics/cvat_strecke1_teilmengen.csv`).
 
 ## Hinweis Albumentations (30.09.2026)
@@ -216,7 +231,8 @@ pip install opencv-python==5.0.0.93
 ```
 
 Die Experimente E0 bis E8 liefen ohne Albumentations, also ohne die Ultralytics-Standardtransformationen (Blur, CLAHE usw. mit je 1 %).
-Beleg: In den Trainingsprotokollen von E0 bis E8 fehlt die Zeile `albumentations:`, die Ultralytics bei installiertem Paket ausgibt.
+Beleg: In den Trainingsprotokollen von E0 bis E8 fehlt die Zeile `albumentations:`, die Ultralytics bei installiertem Paket ausgibt
+(Auszug in `logs/albumentations_nachweis.txt`).
 Damit eine Wiederholung in der heutigen Umgebung (mit Albumentations) gleich läuft, setzt `configs/experiments.yaml` für
 E0 bis E8 `aug_preset: keine` (leere Liste). Bei den Seed-Läufen vom 02.11.2026 zeigt das Protokoll entsprechend `albumentations:` ohne Einträge.
 

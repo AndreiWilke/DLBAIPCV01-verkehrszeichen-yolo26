@@ -1,0 +1,18 @@
+Auszug aus den Trainingsprotokollen im Arbeitsverzeichnis (C:\IU\DLBAIPCV01\logs), erstellt am 02.11.2026.
+Ultralytics gibt bei installiertem Albumentations je Training eine Zeile 'albumentations: <Transformationen>' aus.
+Fehlt die Zeile, war das Paket nicht installiert. Eine leere Liste bedeutet: Standardtransformationen abgeschaltet.
+
+== E0.log (E0): 0 Zeilen 'albumentations:', Laeufe: E0_baseline_n1280
+== E1-E3_abbruch.log (E1 bis E3 (erster Versuch, abgebrochen)): 0 Zeilen 'albumentations:', Laeufe: E1_n640, E2_n960, E3_s1280
+== E3-E7.log (E3 bis E7): 0 Zeilen 'albumentations:', Laeufe: E3_s1280, E5_n1280_adamw, E6_n1280_flip, E7_full43_n1280
+== E8.log (E8): 0 Zeilen 'albumentations:', Laeufe: E8_full43_n1280_flip
+== verbesserung.log (E9, E10): 3 Zeilen 'albumentations:', Laeufe: E9_s1280_robust, E10_n1280_robust
+   albumentations: MotionBlur(p=0.2, allow_shifted=True, angle_range=(0.0, 360.0), blur_limit=(3, 11), direction_range=(-1.0, 1.0)), GaussNoise(p=0.2, mean_range=(0.0, 0.0), noise_scale_factor=1.0, per_channel=True, std_ran
+== e11_training.log (E11): 2 Zeilen 'albumentations:', Laeufe: E11_s1280_robust_farbe
+   albumentations: MotionBlur(p=0.2, allow_shifted=True, angle_range=(0.0, 360.0), blur_limit=(3, 11), direction_range=(-1.0, 1.0)), GaussNoise(p=0.2, mean_range=(0.0, 0.0), noise_scale_factor=1.0, per_channel=True, std_ran
+== seeds_training.log (Seeds 01.11. (E0/E3 mit Standardtransformationen, verworfen)): 11 Zeilen 'albumentations:', Laeufe: E0_baseline_n1280_seed1, E0_baseline_n1280_seed2, E3_s1280_seed1, E3_s1280_seed2, E9_s1280_robust_seed1, E9_s1280_robust_seed2
+   albumentations: Blur(p=0.01, blur_limit=(3, 7)), MedianBlur(p=0.01, blur_limit=(3, 7)), ToGray(p=0.01, method='weighted_average', num_output_channels=3), CLAHE(p=0.01, clip_limit=(1.0, 4.0), tile_grid_size=(8, 8))
+   albumentations: MotionBlur(p=0.2, allow_shifted=True, angle_range=(0.0, 360.0), blur_limit=(3, 11), direction_range=(-1.0, 1.0)), GaussNoise(p=0.2, mean_range=(0.0, 0.0), noise_scale_factor=1.0, per_channel=True, std_ran
+== seeds2_training.log (Seeds 02.11. (E0/E3 mit aug_preset keine)): 8 Zeilen 'albumentations:', Laeufe: E0_baseline_n1280_seed1, E0_baseline_n1280_seed2, E3_s1280_seed1, E3_s1280_seed2
+   albumentations:
+Hinweis: Fuer E4 (E4_n1280_farbaug) ist kein Trainingsprotokoll erhalten. E4 lief am 29.09.2026 zwischen E3 und E5, vor der Installation von Albumentations am 30.09.2026.
